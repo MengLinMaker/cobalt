@@ -11,21 +11,7 @@ export default async function (res, streamInfo) {
 
       case 'internal':
         return internalStream(streamInfo, res)
-
-      case 'merge':
-        return stream.merge(streamInfo, res)
-
-      case 'remux':
-      case 'mute':
-        return stream.remux(streamInfo, res)
-
-      case 'audio':
-        return stream.convertAudio(streamInfo, res)
-
-      case 'gif':
-        return stream.convertGif(streamInfo, res)
     }
-
     closeResponse(res)
   } catch {
     closeResponse(res)
