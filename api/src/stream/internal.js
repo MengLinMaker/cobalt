@@ -39,8 +39,10 @@ async function* readChunks(streamInfo, size) {
 
 async function handleYoutubeStream(streamInfo, res) {
   const { signal } = streamInfo.controller
-  const cleanup = () => (res.end(), closeRequest(streamInfo.controller))
-
+  const cleanup = () => {
+    res.end()
+    return closeRequest(streamInfo.controller)
+  }
   try {
     const req = await fetch(streamInfo.url, {
       headers: getHeaders('youtube'),

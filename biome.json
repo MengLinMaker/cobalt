@@ -17,7 +17,6 @@
         "useTemplate": "off",
         "noUnusedTemplateLiteral": "off",
         "noParameterAssign": "off",
-        "noCommaOperator": "off",
         "useDefaultParameterLast": "off"
       },
       "suspicious": {

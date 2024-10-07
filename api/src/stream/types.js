@@ -44,9 +44,11 @@ const getCommand = (args) => {
 
 const proxy = async (streamInfo, res) => {
   const abortController = new AbortController()
-  const shutdown = () => (
-    closeRequest(abortController), closeResponse(res), destroyInternalStream(streamInfo.urls)
-  )
+  const shutdown = () => {
+    closeRequest(abortController)
+    closeResponse(res)
+    return destroyInternalStream(streamInfo.urls)
+  }
 
   try {
     res.setHeader('Cross-Origin-Resource-Policy', 'cross-origin')
@@ -81,9 +83,11 @@ const proxy = async (streamInfo, res) => {
 
 const merge = (streamInfo, res) => {
   let process
-  const shutdown = () => (
-    killProcess(process), closeResponse(res), streamInfo.urls.map(destroyInternalStream)
-  )
+  const shutdown = () => {
+    killProcess(process)
+    closeResponse(res)
+    return streamInfo.urls.map(destroyInternalStream)
+  }
 
   const headers = getHeaders(streamInfo.service)
   const rawHeaders = toRawHeaders(headers)
@@ -143,9 +147,11 @@ const merge = (streamInfo, res) => {
 
 const remux = (streamInfo, res) => {
   let process
-  const shutdown = () => (
-    killProcess(process), closeResponse(res), destroyInternalStream(streamInfo.urls)
-  )
+  const shutdown = () => {
+    killProcess(process)
+    closeResponse(res)
+    return destroyInternalStream(streamInfo.urls)
+  }
 
   try {
     const args = ['-loglevel', '-8', '-headers', toRawHeaders(getHeaders(streamInfo.service))]
@@ -195,9 +201,11 @@ const remux = (streamInfo, res) => {
 
 const convertAudio = (streamInfo, res) => {
   let process
-  const shutdown = () => (
-    killProcess(process), closeResponse(res), destroyInternalStream(streamInfo.urls)
-  )
+  const shutdown = () => {
+    killProcess(process)
+    closeResponse(res)
+    return destroyInternalStream(streamInfo.urls)
+  }
 
   try {
     let args = ['-loglevel', '-8', '-headers', toRawHeaders(getHeaders(streamInfo.service))]
@@ -251,7 +259,10 @@ const convertAudio = (streamInfo, res) => {
 
 const convertGif = (streamInfo, res) => {
   let process
-  const shutdown = () => (killProcess(process), closeResponse(res))
+  const shutdown = () => {
+    killProcess(process)
+    return closeResponse(res)
+  }
 
   try {
     let args = ['-loglevel', '-8']

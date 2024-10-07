@@ -16,7 +16,10 @@ function com_resolveShortlink(shortId) {
 function getBest(content) {
   return content
     ?.filter((v) => v.baseUrl || v.url)
-    .map((v) => ((v.baseUrl = v.baseUrl || v.url), v))
+    .map((v) => {
+      v.baseUrl = v.baseUrl || v.url
+      return v
+    })
     .reduce((a, b) => (a?.bandwidth > b?.bandwidth ? a : b))
 }
 
