@@ -14,7 +14,7 @@ const finnicky = new Set(['bilibili', 'instagram', 'facebook', 'youtube'])
 
 const action = process.argv[2]
 switch (action) {
-  case 'get-services':
+  case 'get-services': {
     const fromConfig = Object.keys(services)
 
     const missingTests = fromConfig.filter(
@@ -30,8 +30,8 @@ switch (action) {
 
     console.log(JSON.stringify(fromConfig))
     break
-
-  case 'run-tests-for':
+  }
+  case 'run-tests-for': {
     const service = process.argv[3]
     let failed = false
 
@@ -77,6 +77,7 @@ switch (action) {
 
     process.exitCode = Number(failed)
     break
+  }
   default:
     console.error('invalid action:', action)
     process.exitCode = 1

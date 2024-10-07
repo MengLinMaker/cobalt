@@ -73,7 +73,7 @@ export default function ({
       }
       break
 
-    case 'muteVideo':
+    case 'muteVideo': {
       let muteType = 'mute'
       if (Array.isArray(r.urls) && !r.isM3U8) {
         muteType = 'proxy'
@@ -86,7 +86,7 @@ export default function ({
         responseType = 'redirect'
       }
       break
-
+    }
     case 'picker':
       responseType = 'picker'
       switch (host) {
@@ -97,7 +97,7 @@ export default function ({
           params = { picker: r.picker }
           break
 
-        case 'tiktok':
+        case 'tiktok': {
           let audioStreamType = 'audio'
           if (r.bestAudio === 'mp3' && audioFormat === 'best') {
             audioFormat = 'mp3'
@@ -116,6 +116,7 @@ export default function ({
             }),
           }
           break
+        }
       }
       break
 
@@ -169,7 +170,7 @@ export default function ({
       }
       break
 
-    case 'audio':
+    case 'audio': {
       if (audioIgnore.includes(host) || (host === 'reddit' && r.typeId === 'redirect')) {
         return createResponse('error', {
           code: 'error.api.fetch.empty',
@@ -210,6 +211,7 @@ export default function ({
         audioFormat,
       }
       break
+    }
   }
 
   if (defaultParams.filename && (action === 'picker' || action === 'audio')) {

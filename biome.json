@@ -31,7 +31,6 @@
         "noGlobalIsNan": "off"
       },
       "correctness": {
-        "noSwitchDeclarations": "off",
         "noUnsafeOptionalChaining": "off"
       },
       "performance": {

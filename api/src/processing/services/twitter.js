@@ -221,7 +221,7 @@ export default async function ({ id, index, toGif, dispatcher, alwaysProxy }) {
         audioFilename: `twitter_${id}_audio`,
         isGif: media[0].type === 'animated_gif',
       }
-    default:
+    default: {
       const proxyThumb = (url, i) => proxyMedia(url, `twitter_${id}_${i + 1}.${getFileExt(url)}`)
 
       const picker = media.map((content, i) => {
@@ -263,5 +263,6 @@ export default async function ({ id, index, toGif, dispatcher, alwaysProxy }) {
         }
       })
       return { picker }
+    }
   }
 }

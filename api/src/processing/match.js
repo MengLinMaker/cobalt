@@ -95,7 +95,7 @@ export default async function ({ host, patternMatch, params }) {
         r = await bilibili(patternMatch)
         break
 
-      case 'youtube':
+      case 'youtube': {
         const fetchInfo = {
           id: patternMatch.id.slice(0, 11),
           quality: params.videoQuality,
@@ -115,7 +115,7 @@ export default async function ({ host, patternMatch, params }) {
 
         r = await youtube(fetchInfo)
         break
-
+      }
       case 'reddit':
         r = await reddit({
           sub: patternMatch.sub,
