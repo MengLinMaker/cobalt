@@ -100,12 +100,7 @@ export default async function ({ comId, tvId, comShortLink }) {
   if (comShortLink) {
     comId = await com_resolveShortlink(comShortLink)
   }
-
-  if (comId) {
-    return com_download(comId)
-  } else if (tvId) {
-    return tv_download(tvId)
-  }
-
+  if (comId) return com_download(comId)
+  if (tvId) return tv_download(tvId)
   return { error: 'fetch.fail' }
 }

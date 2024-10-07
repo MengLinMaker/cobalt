@@ -17,7 +17,6 @@
         "useSingleVarDeclarator": "off",
         "useTemplate": "off",
         "noUnusedTemplateLiteral": "off",
-        "noUselessElse": "off",
         "noParameterAssign": "off",
         "noCommaOperator": "off",
         "useDefaultParameterLast": "off"

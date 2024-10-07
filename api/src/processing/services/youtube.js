@@ -108,11 +108,9 @@ export default async function (o) {
       }),
     )
   } catch (e) {
-    if (e.message?.endsWith('decipher algorithm')) {
-      return { error: 'youtube.decipher' }
-    } else if (e.message?.includes('refresh access token')) {
-      return { error: 'youtube.token_expired' }
-    } else throw e
+    if (e.message?.endsWith('decipher algorithm')) return { error: 'youtube.decipher' }
+    if (e.message?.includes('refresh access token')) return { error: 'youtube.token_expired' }
+    throw e
   }
 
   const quality = o.quality === 'max' ? '9000' : o.quality
@@ -132,13 +130,9 @@ export default async function (o) {
   try {
     info = await yt.getBasicInfo(o.id, yt.session.logged_in ? 'ANDROID' : 'IOS')
   } catch (e) {
-    if (e?.info?.reason === 'This video is private') {
-      return { error: 'content.video.private' }
-    } else if (e?.message === 'This video is unavailable') {
-      return { error: 'content.video.unavailable' }
-    } else {
-      return { error: 'fetch.fail' }
-    }
+    if (e?.info?.reason === 'This video is private') return { error: 'content.video.private' }
+    if (e?.message === 'This video is unavailable') return { error: 'content.video.unavailable' }
+    return { error: 'fetch.fail' }
   }
 
   if (!info) return { error: 'fetch.fail' }

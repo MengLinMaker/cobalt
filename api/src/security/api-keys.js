@@ -50,8 +50,7 @@ const validateKeys = (input) => {
     if (details.limit && details.limit !== 'unlimited') {
       if (typeof details.limit !== 'number')
         throw 'detail object contains invalid limit (not a number)'
-      else if (details.limit < 1)
-        throw 'detail object contains invalid limit (not a positive number)'
+      if (details.limit < 1) throw 'detail object contains invalid limit (not a positive number)'
     }
 
     if (details.ips) {

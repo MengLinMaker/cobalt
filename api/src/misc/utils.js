@@ -63,9 +63,6 @@ export function splitFilenameExtension(filename) {
   const parts = filename.split('.')
   const ext = parts.pop()
 
-  if (!parts.length) {
-    return [ext, '']
-  } else {
-    return [parts.join('.'), ext]
-  }
+  if (!parts.length) return [ext, '']
+  return [parts.join('.'), ext]
 }

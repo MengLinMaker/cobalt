@@ -26,11 +26,8 @@ function request(domain, id) {
 export default async function (input) {
   let { subdomain } = psl.parse(input.url.hostname)
 
-  if (subdomain?.includes('.')) {
-    return { error: 'link.unsupported' }
-  } else if (subdomain === 'www' || subdomain === 'at') {
-    subdomain = undefined
-  }
+  if (subdomain?.includes('.')) return { error: 'link.unsupported' }
+  if (subdomain === 'www' || subdomain === 'at') subdomain = undefined
 
   const domain = `${subdomain ?? input.user}.tumblr.com`
   const data = await request(domain, input.id)
