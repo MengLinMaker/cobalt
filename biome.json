@@ -1,0 +1,74 @@
+{
+  "$schema": "https://biomejs.dev/schemas/1.8.3/schema.json",
+  "files": {
+    "ignore": ["node_modules", "web"],
+    "ignoreUnknown": true
+  },
+  "formatter": {
+    "enabled": true,
+    "indentStyle": "space",
+    "lineWidth": 100
+  },
+  "linter": {
+    "enabled": true,
+    "rules": {
+      "recommended": true,
+      "style": {
+        "noNonNullAssertion": "off",
+        "useNodejsImportProtocol": "off",
+        "useImportType": "off",
+        "useSingleVarDeclarator": "off",
+        "useTemplate": "off",
+        "noUnusedTemplateLiteral": "off",
+        "noUselessElse": "off",
+        "noParameterAssign": "off",
+        "noCommaOperator": "off",
+        "useDefaultParameterLast": "off",
+        "noVar": "off"
+      },
+      "complexity": {
+        "noForEach": "off",
+        "useLiteralKeys": "off",
+        "noUselessSwitchCase": "off"
+      },
+      "suspicious": {
+        "noAssignInExpressions": "off",
+        "useDefaultSwitchClauseLast": "off",
+        "noGlobalIsNan": "off"
+      },
+      "correctness": {
+        "noSwitchDeclarations": "off",
+        "noUnsafeOptionalChaining": "off"
+      },
+      "performance": {
+        "noAccumulatingSpread": "off",
+        "noDelete": "off"
+      }
+    }
+  },
+  "javascript": {
+    "jsxRuntime": "reactClassic",
+    "formatter": {
+      "semicolons": "asNeeded",
+      "quoteStyle": "single"
+    }
+  },
+  "json": {
+    "parser": {
+      "allowComments": true
+    }
+  },
+  "overrides": [
+    {
+      "include": ["*.svelte", "*.astro", "*.vue"],
+      "linter": {
+        "rules": {
+          "style": {
+            "useConst": "off",
+            "useImportType": "off"
+          }
+        }
+      }
+    }
+  ]
+}
