@@ -35,7 +35,8 @@ let freebind
 export default async function ({ host, patternMatch, params }) {
   const { url } = params
   assert(url instanceof URL)
-  let dispatcher, requestIP
+  let dispatcher
+  let requestIP
 
   if (env.freebindCIDR) {
     if (!freebind) {
@@ -47,9 +48,9 @@ export default async function ({ host, patternMatch, params }) {
   }
 
   try {
-    let r,
-      isAudioOnly = params.downloadMode === 'audio',
-      isAudioMuted = params.downloadMode === 'mute'
+    let r
+    let isAudioOnly = params.downloadMode === 'audio'
+    let isAudioMuted = params.downloadMode === 'mute'
 
     if (!testers[host]) {
       return createResponse('error', {

@@ -15,9 +15,9 @@ async function getAccessToken() {
   const cookie = await getCookie('reddit')
   if (!cookie) return
 
-  const values = cookie.values(),
-    needRefresh =
-      !values.access_token || !values.expiry || Number(values.expiry) < new Date().getTime()
+  const values = cookie.values()
+  const needRefresh =
+    !values.access_token || !values.expiry || Number(values.expiry) < new Date().getTime()
   if (!needRefresh) return values.access_token
 
   const data = await fetch('https://www.reddit.com/api/v1/access_token', {
@@ -89,9 +89,9 @@ export default async function (obj) {
   if (data.secure_media?.reddit_video?.duration > env.durationLimit)
     return { error: 'content.too_long' }
 
-  let audio = false,
-    video = data.secure_media?.reddit_video?.fallback_url?.split('?')[0],
-    audioFileLink = `${data.secure_media?.reddit_video?.fallback_url?.split('DASH')[0]}audio`
+  let audio = false
+  const video = data.secure_media?.reddit_video?.fallback_url?.split('?')[0]
+  let audioFileLink = `${data.secure_media?.reddit_video?.fallback_url?.split('DASH')[0]}audio`
 
   if (video.match('.mp4')) {
     audioFileLink = `${video.split('_')[0]}_audio.mp4`

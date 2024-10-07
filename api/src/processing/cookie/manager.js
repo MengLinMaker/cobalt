@@ -3,13 +3,13 @@ import { parse as parseSetCookie, splitCookiesString } from 'set-cookie-parser'
 import { env } from '../../config.js'
 import Cookie from './cookie.js'
 
-const WRITE_INTERVAL = 60000,
-  cookiePath = env.cookiePath,
-  COUNTER = Symbol('counter')
+const WRITE_INTERVAL = 60000
+const cookiePath = env.cookiePath
+const COUNTER = Symbol('counter')
 
-let cookies = {},
-  dirty = false,
-  intervalId
+let cookies = {}
+let dirty = false
+let intervalId
 
 const setup = async () => {
   try {
@@ -55,9 +55,9 @@ export function updateCookie(cookie, headers) {
   if (!cookie) return
 
   const parsed = parseSetCookie(splitCookiesString(headers.get('set-cookie')), {
-      decodeValues: false,
-    }),
-    values = {}
+    decodeValues: false,
+  })
+  const values = {}
 
   cookie.unset(parsed.filter((c) => c.expires < new Date()).map((c) => c.name))
   parsed.filter((c) => !c.expires || c.expires > new Date()).map((c) => (values[c.name] = c.value))

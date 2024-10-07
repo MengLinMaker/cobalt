@@ -21,8 +21,8 @@ function getBest(content) {
 }
 
 function extractBestQuality(dashData) {
-  const bestVideo = getBest(dashData.video),
-    bestAudio = getBest(dashData.audio)
+  const bestVideo = getBest(dashData.video)
+  const bestAudio = getBest(dashData.audio)
 
   if (!bestVideo || !bestAudio) return []
   return [bestVideo, bestAudio]

@@ -18,8 +18,8 @@ export function createResponse(responseType, responseData) {
   }
 
   try {
-    let status = 200,
-      response = {}
+    let status = 200
+    let response = {}
 
     if (responseType === 'error') {
       status = 400

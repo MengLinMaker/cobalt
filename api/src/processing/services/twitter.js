@@ -172,9 +172,9 @@ export default async function ({ id, index, toGif, dispatcher, alwaysProxy }) {
     return { error: 'content.post.unavailable' }
   }
 
-  let tweetResult = tweet.data.tweetResult.result,
-    baseTweet = tweetResult.legacy,
-    repostedTweet = baseTweet?.retweeted_status_result?.result.legacy.extended_entities
+  const tweetResult = tweet.data.tweetResult.result
+  let baseTweet = tweetResult.legacy
+  let repostedTweet = baseTweet?.retweeted_status_result?.result.legacy.extended_entities
 
   if (tweetTypename === 'TweetWithVisibilityResults') {
     baseTweet = tweetResult.tweet.legacy

@@ -26,27 +26,27 @@ const internalStreamCache = new Map()
 const hmacSalt = randomBytes(64).toString('hex')
 
 export function createStream(obj) {
-  const streamID = nanoid(),
-    iv = randomBytes(16).toString('base64url'),
-    secret = randomBytes(32).toString('base64url'),
-    exp = new Date().getTime() + env.streamLifespan * 1000,
-    hmac = generateHmac(`${streamID},${exp},${iv},${secret}`, hmacSalt),
-    streamData = {
-      exp: exp,
-      type: obj.type,
-      urls: obj.u,
-      service: obj.service,
-      filename: obj.filename,
+  const streamID = nanoid()
+  const iv = randomBytes(16).toString('base64url')
+  const secret = randomBytes(32).toString('base64url')
+  const exp = new Date().getTime() + env.streamLifespan * 1000
+  const hmac = generateHmac(`${streamID},${exp},${iv},${secret}`, hmacSalt)
+  const streamData = {
+    exp: exp,
+    type: obj.type,
+    urls: obj.u,
+    service: obj.service,
+    filename: obj.filename,
 
-      requestIP: obj.requestIP,
-      headers: obj.headers,
+    requestIP: obj.requestIP,
+    headers: obj.headers,
 
-      metadata: obj.fileMetadata || false,
+    metadata: obj.fileMetadata || false,
 
-      audioBitrate: obj.audioBitrate,
-      audioCopy: !!obj.audioCopy,
-      audioFormat: obj.audioFormat,
-    }
+    audioBitrate: obj.audioBitrate,
+    audioCopy: !!obj.audioCopy,
+    audioFormat: obj.audioFormat,
+  }
 
   streamCache.set(streamID, encryptStream(streamData, iv, secret))
 

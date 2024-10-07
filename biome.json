@@ -14,7 +14,6 @@
     "rules": {
       "recommended": true,
       "style": {
-        "useSingleVarDeclarator": "off",
         "useTemplate": "off",
         "noUnusedTemplateLiteral": "off",
         "noParameterAssign": "off",

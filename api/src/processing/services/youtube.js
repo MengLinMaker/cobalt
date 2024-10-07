@@ -8,7 +8,8 @@ import { getCookie, updateCookieValues } from '../cookie/manager.js'
 
 const PLAYER_REFRESH_PERIOD = 1000 * 60 * 15 // ms
 
-let innertube, lastRefreshedAt
+let innertube
+let lastRefreshedAt
 
 const codecMatch = {
   h264: {
@@ -115,9 +116,9 @@ export default async function (o) {
 
   const quality = o.quality === 'max' ? '9000' : o.quality
 
-  let info,
-    isDubbed,
-    format = o.format || 'h264'
+  let info
+  let isDubbed
+  let format = o.format || 'h264'
 
   function qual(i) {
     if (!i.quality_label) {
@@ -260,12 +261,14 @@ export default async function (o) {
       bestAudio: format === 'h264' ? 'm4a' : 'opus',
     }
 
-  const matchingQuality = Number(quality) > Number(bestQuality) ? bestQuality : quality,
-    checkSingle = (i) =>
-      qual(i) === matchingQuality && i.mime_type.includes(codecMatch[format].videoCodec),
-    checkRender = (i) => qual(i) === matchingQuality && i.has_video && !i.has_audio
+  const matchingQuality = Number(quality) > Number(bestQuality) ? bestQuality : quality
+  const checkSingle = (i) =>
+    qual(i) === matchingQuality && i.mime_type.includes(codecMatch[format].videoCodec)
+  const checkRender = (i) => qual(i) === matchingQuality && i.has_video && !i.has_audio
 
-  let match, type, urls
+  let match
+  let type
+  let urls
 
   // prefer good premuxed videos if available
   if (!o.isAudioOnly && !o.isAudioMuted && format === 'h264' && bestVideo.fps <= 30) {

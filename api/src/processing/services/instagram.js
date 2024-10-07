@@ -279,7 +279,8 @@ export default function (obj) {
   }
 
   async function getPost(id, alwaysProxy) {
-    let data, result
+    let data
+    let result
     try {
       const cookie = getCookie('instagram')
 

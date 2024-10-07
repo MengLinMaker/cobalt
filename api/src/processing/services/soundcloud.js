@@ -75,9 +75,9 @@ export default async function (obj) {
 
   if (!json.media.transcodings) return { error: 'fetch.empty' }
 
-  let bestAudio = 'opus',
-    selectedStream = json.media.transcodings.find((v) => v.preset === 'opus_0_0'),
-    mp3Media = json.media.transcodings.find((v) => v.preset === 'mp3_0_0')
+  let bestAudio = 'opus'
+  let selectedStream = json.media.transcodings.find((v) => v.preset === 'opus_0_0')
+  const mp3Media = json.media.transcodings.find((v) => v.preset === 'mp3_0_0')
 
   // use mp3 if present if user prefers it or if opus isn't available
   if (mp3Media && (obj.format === 'mp3' || !selectedStream)) {

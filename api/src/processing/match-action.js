@@ -18,19 +18,19 @@ export default function ({
   audioBitrate,
   alwaysProxy,
 }) {
-  let action,
-    responseType = 'tunnel',
-    defaultParams = {
-      u: r.urls,
-      headers: r.headers,
-      service: host,
-      filename: r.filenameAttributes
-        ? createFilename(r.filenameAttributes, filenameStyle, isAudioOnly, isAudioMuted)
-        : r.filename,
-      fileMetadata: !disableMetadata ? r.fileMetadata : false,
-      requestIP,
-    },
-    params = {}
+  let action
+  let responseType = 'tunnel'
+  const defaultParams = {
+    u: r.urls,
+    headers: r.headers,
+    service: host,
+    filename: r.filenameAttributes
+      ? createFilename(r.filenameAttributes, filenameStyle, isAudioOnly, isAudioMuted)
+      : r.filename,
+    fileMetadata: !disableMetadata ? r.fileMetadata : false,
+    requestIP,
+  }
+  let params = {}
 
   if (r.isPhoto) action = 'photo'
   else if (r.picker) action = 'picker'

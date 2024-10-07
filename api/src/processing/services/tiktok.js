@@ -53,13 +53,13 @@ export default async function (obj) {
     return { error: 'fetch.fail' }
   }
 
-  let video,
-    videoFilename,
-    audioFilename,
-    audio,
-    images,
-    filenameBase = `tiktok_${detail.author.uniqueId}_${postId}`,
-    bestAudio // will get defaulted to m4a later on in match-action
+  let video
+  let videoFilename
+  let audioFilename
+  let audio
+  let images
+  const filenameBase = `tiktok_${detail.author.uniqueId}_${postId}`
+  let bestAudio // will get defaulted to m4a later on in match-action
 
   images = detail.imagePost?.images
 
