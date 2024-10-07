@@ -36,7 +36,7 @@ const killProcess = (p) => {
 }
 
 const getCommand = (args) => {
-  if (typeof env.processingPriority === 'number' && !isNaN(env.processingPriority)) {
+  if (typeof env.processingPriority === 'number' && !Number.isNaN(env.processingPriority)) {
     return ['nice', ['-n', env.processingPriority.toString(), ffmpeg, ...args]]
   }
   return [ffmpeg, args]

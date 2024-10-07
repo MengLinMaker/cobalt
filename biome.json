@@ -24,8 +24,7 @@
       },
       "suspicious": {
         "noAssignInExpressions": "off",
-        "useDefaultSwitchClauseLast": "off",
-        "noGlobalIsNan": "off"
+        "useDefaultSwitchClauseLast": "off"
       },
       "correctness": {
         "noUnsafeOptionalChaining": "off"
