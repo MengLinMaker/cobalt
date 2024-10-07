@@ -1,4 +1,3 @@
-import { getBranch, getCommit, getRemote, getVersion } from '@imput/version-info'
 import cors from 'cors'
 import rateLimit from 'express-rate-limit'
 import { ProxyAgent, setGlobalDispatcher } from 'undici'
@@ -17,14 +16,6 @@ import { extract } from '../processing/url.js'
 import * as APIKeys from '../security/api-keys.js'
 import { verifyTurnstileToken } from '../security/turnstile.js'
 import { getInternalStream, verifyStream } from '../stream/manage.js'
-
-const git = {
-  branch: await getBranch(),
-  commit: await getCommit(),
-  remote: await getRemote(),
-}
-
-const version = await getVersion()
 
 const acceptRegex = /^application\/json(; charset=utf-8)?$/
 
@@ -47,7 +38,6 @@ export const runAPI = (express, app, __dirname) => {
 
   const serverInfo = JSON.stringify({
     cobalt: {
-      version: version,
       url: env.apiURL,
       startTime: `${startTimestamp}`,
       durationLimit: env.durationLimit,
@@ -56,7 +46,6 @@ export const runAPI = (express, app, __dirname) => {
         return friendlyServiceName(e)
       }),
     },
-    git,
   })
 
   const handleRateExceeded = (_, res) => {
