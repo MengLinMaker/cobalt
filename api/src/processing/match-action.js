@@ -54,11 +54,6 @@ export default function ({
   }
 
   switch (action) {
-    default:
-      return createResponse('error', {
-        code: 'error.api.fetch.empty',
-      })
-
     case 'photo':
       responseType = 'redirect'
       break
@@ -212,6 +207,11 @@ export default function ({
       }
       break
     }
+
+    default:
+      return createResponse('error', {
+        code: 'error.api.fetch.empty',
+      })
   }
 
   if (defaultParams.filename && (action === 'picker' || action === 'audio')) {

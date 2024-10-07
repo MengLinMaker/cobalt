@@ -23,8 +23,7 @@
         "useDefaultParameterLast": "off"
       },
       "suspicious": {
-        "noAssignInExpressions": "off",
-        "useDefaultSwitchClauseLast": "off"
+        "noAssignInExpressions": "off"
       },
       "correctness": {
         "noUnsafeOptionalChaining": "off"
