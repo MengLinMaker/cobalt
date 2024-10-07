@@ -1,6 +1,5 @@
 import { z } from 'zod'
 
-import { verifyLanguageCode } from '../misc/utils.js'
 import { normalizeURL } from './url.js'
 
 export const apiSchema = z
@@ -23,8 +22,6 @@ export const apiSchema = z
     videoQuality: z
       .enum(['max', '4320', '2160', '1440', '1080', '720', '480', '360', '240', '144'])
       .default('1080'),
-
-    youtubeDubLang: z.string().length(2).transform(verifyLanguageCode).optional(),
 
     alwaysProxy: z.boolean().default(false),
     disableMetadata: z.boolean().default(false),
