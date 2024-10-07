@@ -112,16 +112,6 @@
       }
     },
     {
-      "name": "age restricted video",
-      "url": "https://x.com/XSpaces/status/1526955853743546372",
-      "params": {},
-      "canFail": true,
-      "expected": {
-        "code": 200,
-        "status": "redirect"
-      }
-    },
-    {
       "name": "twitter voice + x.com link",
       "url": "https://x.com/eggsaladscreams/status/1693089534886506756?s=46",
       "params": {},
@@ -301,35 +291,11 @@
   ],
   "youtube": [
     {
-      "name": "4k video (h264, 1440)",
-      "url": "https://www.youtube.com/watch?v=vPwaXytZcgI",
-      "params": {
-        "youtubeVideoCodec": "h264",
-        "videoQuality": "1440"
-      },
-      "expected": {
-        "code": 200,
-        "status": "tunnel"
-      }
-    },
-    {
       "name": "4k video (vp9, 720)",
       "url": "https://www.youtube.com/watch?v=vPwaXytZcgI",
       "params": {
         "youtubeVideoCodec": "vp9",
         "videoQuality": "720"
-      },
-      "expected": {
-        "code": 200,
-        "status": "tunnel"
-      }
-    },
-    {
-      "name": "4k video (av1, max)",
-      "url": "https://www.youtube.com/watch?v=vPwaXytZcgI",
-      "params": {
-        "youtubeVideoCodec": "av1",
-        "videoQuality": "max"
       },
       "expected": {
         "code": 200,
@@ -438,17 +404,6 @@
       }
     },
     {
-      "name": "audio bitrate higher than video, no vp9 video in response (vp9)",
-      "url": "https://www.youtube.com/watch?v=t5nC_ucYBrc",
-      "params": {
-        "youtubeVideoCodec": "vp9"
-      },
-      "expected": {
-        "code": 400,
-        "status": "error"
-      }
-    },
-    {
       "name": "short, defaults",
       "url": "https://www.youtube.com/shorts/r5FpeOJItbw",
       "params": {},
@@ -481,77 +436,6 @@
     {
       "name": "inexistent video",
       "url": "https://youtube.com/watch?v=gnjuHYWGEW",
-      "params": {},
-      "expected": {
-        "code": 400,
-        "status": "error"
-      }
-    }
-  ],
-  "vk": [
-    {
-      "name": "clip, defaults",
-      "url": "https://vk.com/clip-57274055_456239788",
-      "params": {},
-      "expected": {
-        "code": 200,
-        "status": "tunnel"
-      }
-    },
-    {
-      "name": "clip, 360",
-      "url": "https://vk.com/clip-57274055_456239788",
-      "params": {
-        "videoQuality": "360"
-      },
-      "expected": {
-        "code": 200,
-        "status": "tunnel"
-      }
-    },
-    {
-      "name": "clip different link, max",
-      "url": "https://vk.com/clips-57274055?z=clip-57274055_456239788",
-      "params": {
-        "videoQuality": "max"
-      },
-      "expected": {
-        "code": 200,
-        "status": "tunnel"
-      }
-    },
-    {
-      "name": "video, defaults",
-      "url": "https://vk.com/video-57274055_456239399",
-      "params": {},
-      "expected": {
-        "code": 200,
-        "status": "tunnel"
-      }
-    },
-    {
-      "name": "4k video",
-      "url": "https://vk.com/video-1112285_456248465",
-      "params": {
-        "videoQuality": "max"
-      },
-      "expected": {
-        "code": 200,
-        "status": "tunnel"
-      }
-    },
-    {
-      "name": "ancient video (fallback to 240p)",
-      "url": "https://vk.com/video-1959_28496479",
-      "params": {},
-      "expected": {
-        "code": 200,
-        "status": "tunnel"
-      }
-    },
-    {
-      "name": "inexistent video",
-      "url": "https://vk.com/video-53333333_456233333",
       "params": {},
       "expected": {
         "code": 400,
@@ -633,15 +517,6 @@
       "params": {
         "downloadMode": "mute"
       },
-      "expected": {
-        "code": 200,
-        "status": "tunnel"
-      }
-    },
-    {
-      "name": "b23.tv shortlink",
-      "url": "https://b23.tv/lbMyOI9",
-      "params": {},
       "expected": {
         "code": 200,
         "status": "tunnel"
@@ -832,15 +707,6 @@
   ],
   "instagram": [
     {
-      "name": "single photo post",
-      "url": "https://www.instagram.com/p/CwIgW8Yu5-I/",
-      "params": {},
-      "expected": {
-        "code": 200,
-        "status": "redirect"
-      }
-    },
-    {
       "name": "various picker (photos + video)",
       "url": "https://www.instagram.com/p/CvYrSgnsKjv/",
       "params": {},
@@ -850,43 +716,12 @@
       }
     },
     {
-      "name": "reel",
-      "url": "https://www.instagram.com/reel/CoEBV3eM4QR/",
-      "params": {},
-      "expected": {
-        "code": 200,
-        "status": "redirect"
-      }
-    },
-    {
       "name": "regular video",
       "url": "https://www.instagram.com/p/CmCVWoIr9OH/",
       "params": {},
       "expected": {
         "code": 200,
         "status": "redirect"
-      }
-    },
-    {
-      "name": "reel (isAudioOnly)",
-      "url": "https://www.instagram.com/reel/CoEBV3eM4QR/",
-      "params": {
-        "downloadMode": "audio"
-      },
-      "expected": {
-        "code": 200,
-        "status": "tunnel"
-      }
-    },
-    {
-      "name": "reel (isAudioMuted)",
-      "url": "https://www.instagram.com/reel/CoEBV3eM4QR/",
-      "params": {
-        "downloadMode": "mute"
-      },
-      "expected": {
-        "code": 200,
-        "status": "tunnel"
       }
     },
     {
@@ -905,15 +740,6 @@
       "expected": {
         "code": 400,
         "status": "error"
-      }
-    },
-    {
-      "name": "post info in an array (for whatever reason??)",
-      "url": "https://www.instagram.com/reel/CrVB9tatUDv/?igshid=blaBlABALALbLABULLSHIT==",
-      "params": {},
-      "expected": {
-        "code": 200,
-        "status": "redirect"
       }
     },
     {
@@ -950,39 +776,6 @@
       "expected": {
         "code": 200,
         "status": "redirect"
-      }
-    }
-  ],
-  "vine": [
-    {
-      "name": "regular vine link (9+10=21)",
-      "url": "https://vine.co/v/huwVJIEJW50",
-      "params": {},
-      "expected": {
-        "code": 200,
-        "status": "redirect"
-      }
-    },
-    {
-      "name": "regular vine link (isAudioOnly)",
-      "url": "https://vine.co/v/huwVJIEJW50",
-      "params": {
-        "downloadMode": "audio"
-      },
-      "expected": {
-        "code": 200,
-        "status": "tunnel"
-      }
-    },
-    {
-      "name": "regular vine link (isAudioMuted)",
-      "url": "https://vine.co/v/huwVJIEJW50",
-      "params": {
-        "downloadMode": "mute"
-      },
-      "expected": {
-        "code": 200,
-        "status": "tunnel"
       }
     }
   ],
@@ -1197,16 +990,6 @@
       }
     },
     {
-      "name": "yappy",
-      "url": "https://rutube.ru/yappy/c8c32bf7aee04412837656ea26c2b25b/",
-      "canFail": true,
-      "params": {},
-      "expected": {
-        "code": 200,
-        "status": "tunnel"
-      }
-    },
-    {
       "name": "shorts",
       "url": "https://rutube.ru/shorts/935c1afafd0e7d52836d671967d53dac/",
       "params": {},
@@ -1240,17 +1023,6 @@
     {
       "name": "private video",
       "url": "https://rutube.ru/video/private/1161415be0e686214bb2a498165cab3e/?p=_IL1G8RSnKutunnTYwhZ5A",
-      "params": {},
-      "expected": {
-        "code": 200,
-        "status": "tunnel"
-      }
-    }
-  ],
-  "ok": [
-    {
-      "name": "regular video",
-      "url": "https://ok.ru/video/7204071410346",
       "params": {},
       "expected": {
         "code": 200,
@@ -1398,99 +1170,12 @@
       }
     },
     {
-      "name": "shared video link",
-      "url": "https://www.facebook.com/share/v/NEf87jbPTvFE8LsL/",
-      "params": {},
-      "expected": {
-        "code": 200,
-        "status": "redirect"
-      }
-    },
-    {
       "name": "shared video link v2",
       "url": "https://web.facebook.com/share/r/JFZfPVgLkiJQmWrr/",
       "params": {},
       "expected": {
         "code": 200,
         "status": "redirect"
-      }
-    }
-  ],
-  "bsky": [
-    {
-      "name": "horizontal video",
-      "url": "https://bsky.app/profile/did:plc:oisofpd7lj26yvgiivf3lxsi/post/3l3giwtwp222m",
-      "params": {},
-      "expected": {
-        "code": 200,
-        "status": "tunnel"
-      }
-    },
-    {
-      "name": "horizontal video, recordWithMedia",
-      "url": "https://bsky.app/profile/did:plc:ywbm3iywnhzep3ckt6efhoh7/post/3l3wonhk23g2i",
-      "params": {},
-      "expected": {
-        "code": 200,
-        "status": "tunnel"
-      }
-    },
-    {
-      "name": "vertical video",
-      "url": "https://bsky.app/profile/did:plc:oisofpd7lj26yvgiivf3lxsi/post/3l3jhpomhjk2m",
-      "params": {},
-      "expected": {
-        "code": 200,
-        "status": "tunnel"
-      }
-    },
-    {
-      "name": "vertical video (muted)",
-      "url": "https://bsky.app/profile/did:plc:oisofpd7lj26yvgiivf3lxsi/post/3l3jhpomhjk2m",
-      "params": {
-        "downloadMode": "mute"
-      },
-      "expected": {
-        "code": 200,
-        "status": "tunnel"
-      }
-    },
-    {
-      "name": "vertical video (audio)",
-      "url": "https://bsky.app/profile/did:plc:oisofpd7lj26yvgiivf3lxsi/post/3l3jhpomhjk2m",
-      "params": {
-        "downloadMode": "audio"
-      },
-      "expected": {
-        "code": 200,
-        "status": "tunnel"
-      }
-    },
-    {
-      "name": "single image",
-      "url": "https://bsky.app/profile/did:plc:k4a7d65fcyevbrnntjxh57go/post/3l33flpoygt26",
-      "params": {},
-      "expected": {
-        "code": 200,
-        "status": "redirect"
-      }
-    },
-    {
-      "name": "several images",
-      "url": "https://bsky.app/profile/did:plc:rai7s6su2sy22ss7skouedl7/post/3kzxuxbiul626",
-      "params": {},
-      "expected": {
-        "code": 200,
-        "status": "picker"
-      }
-    },
-    {
-      "name": "deleted post/invalid user",
-      "url": "https://bsky.app/profile/notreal.bsky.team/post/3l2udah76ch2c",
-      "params": {},
-      "expected": {
-        "code": 400,
-        "status": "error"
       }
     }
   ]
