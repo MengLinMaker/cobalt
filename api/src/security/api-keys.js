@@ -1,7 +1,6 @@
 import { readFile } from 'node:fs/promises'
 import ip from 'ipaddr.js'
 import { env } from '../config.js'
-import { Yellow } from '../misc/console-text.js'
 
 // this function is a modified variation of code
 // from https://stackoverflow.com/a/32402438/14855621
@@ -44,7 +43,7 @@ const validateKeys = (input) => {
 
     const unexpected_key = Object.keys(details).find((k) => !ALLOWED_KEYS.has(k))
     if (unexpected_key) {
-      throw 'detail object contains unexpected key: ' + unexpected_key
+      throw `detail object contains unexpected key: ${unexpected_key}`
     }
 
     if (details.limit && details.limit !== 'unlimited') {
@@ -62,7 +61,7 @@ const validateKeys = (input) => {
       )
 
       if (invalid_ip) {
-        throw '`ips` in details contains an invalid IP or CIDR range: ' + invalid_ip
+        throw `\`ips\` in details contains an invalid IP or CIDR range: ${invalid_ip}`
       }
     }
 
@@ -72,7 +71,7 @@ const validateKeys = (input) => {
 
       const invalid_ua = details.userAgents.find((ua) => typeof ua !== 'string')
       if (invalid_ua) {
-        throw '`userAgents` in details contains an invalid user agent: ' + invalid_ua
+        throw `\`userAgents\` in details contains an invalid user agent: ${invalid_ua}`
       }
     }
   })
@@ -130,7 +129,7 @@ const wrapLoad = (url) => {
   loadKeys(url)
     .then(() => {})
     .catch((e) => {
-      console.error(`${Yellow('[!]')} Failed loading API keys at ${new Date().toISOString()}.`)
+      console.error(`Failed loading API keys at ${new Date().toISOString()}.`)
       console.error('Error:', e)
     })
 }

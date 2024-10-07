@@ -8,7 +8,6 @@ import jwt from '../security/jwt.js'
 import stream from '../stream/stream.js'
 
 import { env } from '../config.js'
-import { Bright, Cyan } from '../misc/console-text.js'
 import { generateHmac, generateSalt } from '../misc/crypto.js'
 import { randomizeCiphers } from '../misc/randomize-ciphers.js'
 import { languageCode } from '../misc/utils.js'
@@ -341,35 +340,5 @@ export const runAPI = (express, app, __dirname) => {
     APIKeys.setup(env.apiKeyURL)
   }
 
-  app.listen(env.apiPort, env.listenAddress, () => {
-    console.log(
-      `\n` +
-        Bright(Cyan('cobalt ')) +
-        Bright('API ^ω⁠^') +
-        '\n' +
-        '~~~~~~\n' +
-        Bright('version: ') +
-        version +
-        '\n' +
-        Bright('commit: ') +
-        git.commit +
-        '\n' +
-        Bright('branch: ') +
-        git.branch +
-        '\n' +
-        Bright('remote: ') +
-        git.remote +
-        '\n' +
-        Bright('start time: ') +
-        startTime.toUTCString() +
-        '\n' +
-        '~~~~~~\n' +
-        Bright('url: ') +
-        Bright(Cyan(env.apiURL)) +
-        '\n' +
-        Bright('port: ') +
-        env.apiPort +
-        '\n',
-    )
-  })
+  app.listen(env.apiPort, env.listenAddress, () => console.log(`Server started: ${env.apiURL}`))
 }

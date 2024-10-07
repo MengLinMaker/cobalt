@@ -6,7 +6,6 @@ import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 
 import { env } from './config.js'
-import { Bright, Green, Red } from './misc/console-text.js'
 
 const app = express()
 
@@ -19,9 +18,5 @@ if (env.apiURL) {
   const { runAPI } = await import('./core/api.js')
   runAPI(express, app, __dirname)
 } else {
-  console.log(
-    Red(`cobalt wasn't configured yet or configuration is invalid.\n`) +
-      Bright(`please run the setup script to fix this: `) +
-      Green(`npm run setup`),
-  )
+  console.log('Please run the setup script: npm run setup')
 }
