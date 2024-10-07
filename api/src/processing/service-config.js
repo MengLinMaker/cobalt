@@ -13,10 +13,6 @@ export const services = {
     ],
     subdomains: ['m'],
   },
-  bsky: {
-    patterns: ['profile/:user/post/:post'],
-    tld: 'app',
-  },
   dailymotion: {
     patterns: ['video/:id'],
   },
@@ -45,10 +41,6 @@ export const services = {
   },
   loom: {
     patterns: ['share/:id'],
-  },
-  ok: {
-    patterns: ['video/:id', 'videoembed/:id'],
-    tld: 'ru',
   },
   pinterest: {
     patterns: ['pin/:id', 'pin/:id/:garbage', 'url_shortener/:shortLink'],
@@ -111,21 +103,9 @@ export const services = {
     subdomains: ['mobile'],
     altDomains: ['x.com', 'vxtwitter.com', 'fixvx.com'],
   },
-  vine: {
-    patterns: ['v/:id'],
-    tld: 'co',
-  },
   vimeo: {
     patterns: [':id', 'video/:id', ':id/:password', '/channels/:user/:id'],
     subdomains: ['player'],
-  },
-  vk: {
-    patterns: [
-      'video:userId_:videoId',
-      'clip:userId_:videoId',
-      'clips:duplicate?z=clip:userId_:videoId',
-    ],
-    subdomains: ['m'],
   },
   youtube: {
     patterns: ['watch?v=:id', 'embed/:id', 'watch/:id'],
