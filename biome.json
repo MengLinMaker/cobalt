@@ -23,8 +23,7 @@
         "noUselessElse": "off",
         "noParameterAssign": "off",
         "noCommaOperator": "off",
-        "useDefaultParameterLast": "off",
-        "noVar": "off"
+        "useDefaultParameterLast": "off"
       },
       "complexity": {
         "noForEach": "off",

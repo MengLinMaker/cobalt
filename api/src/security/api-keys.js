@@ -6,8 +6,8 @@ import { Yellow } from '../misc/console-text.js'
 // this function is a modified variation of code
 // from https://stackoverflow.com/a/32402438/14855621
 const generateWildcardRegex = (rule) => {
-  var escapeRegex = (str) => str.replace(/([.*+?^=!:${}()|\[\]\/\\])/g, '\\$1')
-  return new RegExp('^' + rule.split('*').map(escapeRegex).join('.*') + '$')
+  const escapeRegex = (str) => str.replace(/([.*+?^=!:${}()|\[\]\/\\])/g, '\\$1')
+  return new RegExp(`^${rule.split('*').map(escapeRegex).join('.*')}$`)
 }
 
 const UUID_REGEX = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/
