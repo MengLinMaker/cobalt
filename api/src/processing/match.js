@@ -9,12 +9,10 @@ import { testers } from './service-patterns.js'
 import { friendlyServiceName } from './service-alias.js'
 
 import bilibili from './services/bilibili.js'
-import bluesky from './services/bluesky.js'
 import dailymotion from './services/dailymotion.js'
 import facebook from './services/facebook.js'
 import instagram from './services/instagram.js'
 import loom from './services/loom.js'
-import ok from './services/ok.js'
 import pinterest from './services/pinterest.js'
 import reddit from './services/reddit.js'
 import rutube from './services/rutube.js'
@@ -26,8 +24,6 @@ import tumblr from './services/tumblr.js'
 import twitch from './services/twitch.js'
 import twitter from './services/twitter.js'
 import vimeo from './services/vimeo.js'
-import vine from './services/vine.js'
-import vk from './services/vk.js'
 import youtube from './services/youtube.js'
 
 let freebind
@@ -74,21 +70,6 @@ export default async function ({ host, patternMatch, params }) {
           toGif: !!params.twitterGif,
           alwaysProxy: params.alwaysProxy,
           dispatcher,
-        })
-        break
-
-      case 'vk':
-        r = await vk({
-          userId: patternMatch.userId,
-          videoId: patternMatch.videoId,
-          quality: params.videoQuality,
-        })
-        break
-
-      case 'ok':
-        r = await ok({
-          id: patternMatch.id,
-          quality: params.videoQuality,
         })
         break
 
@@ -175,12 +156,6 @@ export default async function ({ host, patternMatch, params }) {
         })
         break
 
-      case 'vine':
-        r = await vine({
-          id: patternMatch.id,
-        })
-        break
-
       case 'pinterest':
         r = await pinterest({
           id: patternMatch.id,
@@ -234,13 +209,6 @@ export default async function ({ host, patternMatch, params }) {
       case 'facebook':
         r = await facebook({
           ...patternMatch,
-        })
-        break
-
-      case 'bsky':
-        r = await bluesky({
-          ...patternMatch,
-          alwaysProxy: params.alwaysProxy,
         })
         break
 
