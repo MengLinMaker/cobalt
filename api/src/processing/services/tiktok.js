@@ -48,7 +48,7 @@ export default async function (obj) {
       .split('<script id="__UNIVERSAL_DATA_FOR_REHYDRATION__" type="application/json">')[1]
       .split('</script>')[0]
     const data = JSON.parse(json)
-    detail = data['__DEFAULT_SCOPE__']['webapp.video-detail']['itemInfo']['itemStruct']
+    detail = data.__DEFAULT_SCOPE__['webapp.video-detail'].itemInfo.itemStruct
   } catch {
     return { error: 'fetch.fail' }
   }

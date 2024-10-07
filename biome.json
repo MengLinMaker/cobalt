@@ -26,7 +26,6 @@
         "useDefaultParameterLast": "off"
       },
       "complexity": {
-        "useLiteralKeys": "off",
         "noUselessSwitchCase": "off"
       },
       "suspicious": {

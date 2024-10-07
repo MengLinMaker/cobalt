@@ -283,7 +283,7 @@ export const runAPI = (express, app, __dirname) => {
     }
 
     if (streamInfo.type === 'proxy') {
-      streamInfo.range = req.headers['range']
+      streamInfo.range = req.headers.range
     }
 
     return stream(res, streamInfo)
