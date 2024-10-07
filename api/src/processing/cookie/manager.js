@@ -1,4 +1,4 @@
-import { readFile, writeFile } from 'fs/promises'
+import { readFile, writeFile } from 'node:fs/promises'
 import { parse as parseSetCookie, splitCookiesString } from 'set-cookie-parser'
 import { env } from '../../config.js'
 import Cookie from './cookie.js'

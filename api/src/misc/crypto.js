@@ -1,4 +1,4 @@
-import { createCipheriv, createDecipheriv, createHmac, randomBytes } from 'crypto'
+import { createCipheriv, createDecipheriv, createHmac, randomBytes } from 'node:crypto'
 
 const algorithm = 'aes256'
 

@@ -1,7 +1,7 @@
 import NodeCache from 'node-cache'
 
-import { strict as assert } from 'assert'
-import { randomBytes } from 'crypto'
+import { strict as assert } from 'node:assert'
+import { randomBytes } from 'node:crypto'
 import { setMaxListeners } from 'node:events'
 import { nanoid } from 'nanoid'
 

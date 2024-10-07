@@ -1,4 +1,4 @@
-import { createHmac } from 'crypto'
+import { createHmac } from 'node:crypto'
 import { nanoid } from 'nanoid'
 
 import { env } from '../config.js'

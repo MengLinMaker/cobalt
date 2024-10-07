@@ -2,8 +2,8 @@ import 'dotenv/config'
 
 import express from 'express'
 
-import path from 'path'
-import { fileURLToPath } from 'url'
+import path from 'node:path'
+import { fileURLToPath } from 'node:url'
 
 import { env } from './config.js'
 import { Bright, Green, Red } from './misc/console-text.js'

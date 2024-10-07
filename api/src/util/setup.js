@@ -1,6 +1,6 @@
-import { execSync } from 'child_process'
-import { appendFileSync, existsSync, unlinkSync } from 'fs'
-import { createInterface } from 'readline'
+import { execSync } from 'node:child_process'
+import { appendFileSync, existsSync, unlinkSync } from 'node:fs'
+import { createInterface } from 'node:readline'
 import { Bright, Cyan } from '../misc/console-text.js'
 import { loadJSON } from '../misc/load-from-fs.js'
 

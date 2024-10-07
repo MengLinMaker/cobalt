@@ -1,4 +1,4 @@
-import { spawn } from 'child_process'
+import { spawn } from 'node:child_process'
 import { create as contentDisposition } from 'content-disposition-header'
 import ffmpeg from 'ffmpeg-static'
 import { request } from 'undici'
