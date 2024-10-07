@@ -29,7 +29,6 @@ export default (f, style, isAudioOnly, isAudioMuted) => {
   }
 
   switch (style) {
-    default:
     case 'classic':
       if (isAudioOnly) {
         if (f.youtubeDubName) {

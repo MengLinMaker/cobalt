@@ -25,9 +25,6 @@
         "noCommaOperator": "off",
         "useDefaultParameterLast": "off"
       },
-      "complexity": {
-        "noUselessSwitchCase": "off"
-      },
       "suspicious": {
         "noAssignInExpressions": "off",
         "useDefaultSwitchClauseLast": "off",
