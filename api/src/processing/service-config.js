@@ -133,7 +133,7 @@ export const services = {
   },
 }
 
-Object.values(services).forEach((service) => {
+Object.values(services).map((service) => {
   service.patterns = service.patterns.map(
     (pattern) =>
       new UrlPattern(pattern, {

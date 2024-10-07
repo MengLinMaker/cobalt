@@ -7,7 +7,7 @@ export default class Cookie {
     this.set(input)
   }
   set(values) {
-    Object.entries(values).forEach(([key, value]) => (this._values[key] = value))
+    Object.entries(values).map(([key, value]) => (this._values[key] = value))
   }
   unset(keys) {
     for (const key of keys) delete this._values[key]
@@ -15,7 +15,7 @@ export default class Cookie {
   static fromString(str) {
     const obj = {}
 
-    str.split('; ').forEach((cookie) => {
+    str.split('; ').map((cookie) => {
       const key = cookie.split('=')[0]
       const value = cookie.split('=').splice(1).join('=')
       obj[key] = value

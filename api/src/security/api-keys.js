@@ -37,7 +37,7 @@ const validateKeys = (input) => {
     throw 'key file contains invalid key(s)'
   }
 
-  Object.values(input).forEach((details) => {
+  Object.values(input).map((details) => {
     if (typeof details !== 'object' || details === null) {
       throw 'some key(s) are incorrectly configured'
     }
