@@ -13,7 +13,6 @@ import { languageCode } from '../misc/utils.js'
 import { createResponse, getIP, normalizeRequest } from '../processing/request.js'
 import { friendlyServiceName } from '../processing/service-alias.js'
 import { extract } from '../processing/url.js'
-import * as APIKeys from '../security/api-keys.js'
 import { verifyTurnstileToken } from '../security/turnstile.js'
 import { getInternalStream, verifyStream } from '../stream/manage.js'
 
@@ -114,27 +113,11 @@ export const runAPI = (express, app, __dirname) => {
   })
 
   app.post('/', (req, res, next) => {
-    if (!env.apiKeyURL) {
+    if (!env.apiKeyURL) return next()
+    if ((env.sessionEnabled || !env.authRequired) && ['missing', 'not_api_key'].includes(error)) {
       return next()
     }
-
-    const { success, error } = APIKeys.validateAuthorization(req)
-    if (!success) {
-      // We call next() here if either if:
-      // a) we have user sessions enabled, meaning the request
-      //    will still need a Bearer token to not be rejected, or
-      // b) we do not require the user to be authenticated, and
-      //    so they can just make the request with the regular
-      //    rate limit configuration;
-      // otherwise, we reject the request.
-      if ((env.sessionEnabled || !env.authRequired) && ['missing', 'not_api_key'].includes(error)) {
-        return next()
-      }
-
-      return fail(res, `error.api.auth.key.${error}`)
-    }
-
-    return next()
+    return fail(res, `error.api.auth.key.${error}`)
   })
 
   app.post('/', (req, res, next) => {

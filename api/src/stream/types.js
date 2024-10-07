@@ -3,7 +3,6 @@ import { request } from 'undici'
 import { destroyInternalStream } from './manage.js'
 import { closeRequest, closeResponse, getHeaders, pipe } from './shared.js'
 
-
 const proxy = async (streamInfo, res) => {
   const abortController = new AbortController()
   const shutdown = () => {
