@@ -40,7 +40,7 @@ const transformSessionData = (cookie) => {
 
   if (values.expires) {
     values.expiry_date = values.expires
-    delete values.expires
+    values.expires = undefined
   } else if (!values.expiry_date) {
     return
   }

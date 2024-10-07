@@ -29,8 +29,7 @@
         "noUnsafeOptionalChaining": "off"
       },
       "performance": {
-        "noAccumulatingSpread": "off",
-        "noDelete": "off"
+        "noAccumulatingSpread": "off"
       }
     }
   },
