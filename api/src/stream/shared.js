@@ -22,14 +22,6 @@ export function closeRequest(controller) {
   } catch {}
 }
 
-export function closeResponse(res) {
-  if (!res.headersSent) {
-    res.sendStatus(500)
-  }
-
-  return res.end()
-}
-
 export function getHeaders(service) {
   // Converting all header values to strings
   return Object.entries({ ...defaultHeaders, ...serviceHeaders[service] }).reduce(
