@@ -1,5 +1,7 @@
 import match from '../processing/match.js'
-import stream from '../stream/stream.js'
+
+import { internalStream } from '../stream/internal.js'
+import stream from '../stream/types.js'
 
 import { env } from '../config.js'
 import { createResponse, normalizeRequest } from '../processing/request.js'
@@ -46,29 +48,13 @@ export const runAPI = (express, app, __dirname) => {
     const sig = String(req.query.sig)
     const sec = String(req.query.sec)
     const iv = String(req.query.iv)
-
-    const checkQueries = id && exp && sig && sec && iv
-    const checkBaseLength = id.length === 21 && exp.length === 13
-    const checkSafeLength = sig.length === 43 && sec.length === 43 && iv.length === 22
-
-    if (!checkQueries || !checkBaseLength || !checkSafeLength) return res.status(400).end()
-    if (req.query.p) return res.status(200).end()
     const streamInfo = verifyStream(id, sig, exp, sec, iv)
-    if (!streamInfo?.service) return res.status(streamInfo.status).end()
-    if (streamInfo.type === 'proxy') streamInfo.range = req.headers.range
-
-    return stream(res, streamInfo)
+    return stream.proxy(streamInfo, res)
   })
 
   app.get('/itunnel', (req, res) => {
-    if (!req.ip.endsWith('127.0.0.1')) return res.sendStatus(403)
-    if (String(req.query.id).length !== 21) return res.sendStatus(400)
-
     const streamInfo = getInternalStream(req.query.id)
-    if (!streamInfo) return res.sendStatus(404)
-    streamInfo.headers = new Map([...(streamInfo.headers || []), ...Object.entries(req.headers)])
-
-    return stream(res, { type: 'internal', ...streamInfo })
+    return internalStream(streamInfo, res)
   })
 
   app.use((_, __, res, ___) => fail(res, 'error.api.generic'))
