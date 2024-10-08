@@ -4,7 +4,7 @@ import { closeRequest, getHeaders, pipe } from './shared.js'
 
 function contentDisposition(filename, options) {
   const opts = options || {}
-  const type = opts.type || "attachment"
+  const type = opts.type || 'attachment'
   const params = createparams(filename, opts.fallback)
   return format({ type, parameters: params })
 }
