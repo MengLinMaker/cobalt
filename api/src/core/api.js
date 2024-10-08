@@ -1,5 +1,4 @@
 import cors from 'cors'
-import rateLimit from 'express-rate-limit'
 import { ProxyAgent, setGlobalDispatcher } from 'undici'
 
 import match from '../processing/match.js'
@@ -9,7 +8,7 @@ import stream from '../stream/stream.js'
 import { env } from '../config.js'
 import { generateHmac, generateSalt } from '../misc/crypto.js'
 import { randomizeCiphers } from '../misc/randomize-ciphers.js'
-import { createResponse, getIP, normalizeRequest } from '../processing/request.js'
+import { createResponse, normalizeRequest } from '../processing/request.js'
 import { extract } from '../processing/url.js'
 import { getInternalStream, verifyStream } from '../stream/manage.js'
 
@@ -38,26 +37,6 @@ export const runAPI = (express, app, __dirname) => {
     })
     return res.status(status).json(body)
   }
-
-  const apiLimiter = rateLimit({
-    windowMs: env.rateLimitWindow * 1000,
-    max: (req) => req.rateLimitMax || env.rateLimitMax,
-    standardHeaders: true,
-    legacyHeaders: false,
-    keyGenerator: (req) => req.rateLimitKey || generateHmac(getIP(req), ipSalt),
-    handler: handleRateExceeded,
-  })
-
-  const apiTunnelLimiter = rateLimit({
-    windowMs: env.rateLimitWindow * 1000,
-    max: (req) => req.rateLimitMax || env.rateLimitMax,
-    standardHeaders: true,
-    legacyHeaders: false,
-    keyGenerator: (req) => req.rateLimitKey || generateHmac(getIP(req), ipSalt),
-    handler: (req, res) => {
-      return res.sendStatus(429)
-    },
-  })
 
   app.set('trust proxy', ['loopback', 'uniquelocal'])
 
@@ -121,7 +100,6 @@ export const runAPI = (express, app, __dirname) => {
     next()
   })
 
-  app.post('/', apiLimiter)
   app.use('/', express.json({ limit: 1024 }))
 
   app.post('/', async (req, res) => {
@@ -162,7 +140,7 @@ export const runAPI = (express, app, __dirname) => {
     }
   })
 
-  app.get('/tunnel', apiTunnelLimiter, (req, res) => {
+  app.get('/tunnel', (req, res) => {
     const id = String(req.query.id)
     const exp = String(req.query.exp)
     const sig = String(req.query.sig)
