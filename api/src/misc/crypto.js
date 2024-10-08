@@ -2,10 +2,6 @@ import { createCipheriv, createDecipheriv, createHmac, randomBytes } from 'node:
 
 const algorithm = 'aes256'
 
-export function generateSalt() {
-  return randomBytes(64).toString('hex')
-}
-
 export function generateHmac(str, salt) {
   return createHmac('sha256', salt).update(str).digest('base64url')
 }

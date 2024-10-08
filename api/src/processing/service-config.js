@@ -1,7 +1,6 @@
 import UrlPattern from 'url-pattern'
 
 export const audioIgnore = ['vk', 'ok', 'loom']
-export const hlsExceptions = ['dailymotion', 'vimeo', 'rutube', 'bsky']
 
 export const services = {
   bilibili: {

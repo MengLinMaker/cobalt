@@ -4,7 +4,7 @@ import { fileURLToPath } from 'node:url'
 
 const root = join(dirname(fileURLToPath(import.meta.url)), '../../')
 
-export function loadFile(path) {
+function loadFile(path) {
   return fs.readFileSync(join(root, path), 'utf-8')
 }
 

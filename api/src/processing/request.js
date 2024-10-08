@@ -79,17 +79,3 @@ export function createResponse(responseType, responseData) {
 export function normalizeRequest(request) {
   return apiSchema.safeParseAsync(request).catch(() => ({ success: false }))
 }
-
-export function getIP(req) {
-  const strippedIP = req.ip.replace(/^::ffff:/, '')
-  const ip = ipaddr.parse(strippedIP)
-  if (ip.kind() === 'ipv4') {
-    return strippedIP
-  }
-
-  const prefix = 56
-  const v6Bytes = ip.toByteArray()
-  v6Bytes.fill(0, prefix / 8)
-
-  return ipaddr.fromByteArray(v6Bytes).toString()
-}
