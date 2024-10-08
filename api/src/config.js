@@ -1,14 +1,11 @@
-import { getVersion } from "@imput/version-info";
-import { services } from "./processing/service-config.js";
+import { services } from "./processing/service-config.js"
 
-const version = await getVersion();
-
-const disabledServices = process.env.DISABLED_SERVICES?.split(',') || [];
+const disabledServices = process.env.DISABLED_SERVICES?.split(',') || []
 const enabledServices = new Set(Object.keys(services).filter(e => {
     if (!disabledServices.includes(e)) {
-        return e;
+        return e
     }
-}));
+}))
 
 const env = {
     apiURL: process.env.API_URL || '',
@@ -40,8 +37,8 @@ const env = {
     jwtLifetime: process.env.JWT_EXPIRY || 120,
 
     sessionEnabled: process.env.TURNSTILE_SITEKEY
-                        && process.env.TURNSTILE_SECRET
-                        && process.env.JWT_SECRET,
+        && process.env.TURNSTILE_SECRET
+        && process.env.JWT_SECRET,
 
     apiKeyURL: process.env.API_KEY_URL && new URL(process.env.API_KEY_URL),
     authRequired: process.env.API_AUTH_REQUIRED === '1',
@@ -51,8 +48,8 @@ const env = {
     enabledServices,
 }
 
-const genericUserAgent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36";
-const cobaltUserAgent = `cobalt/${version} (+https://github.com/imputnet/cobalt)`;
+const genericUserAgent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36"
+const cobaltUserAgent = "cobalt (+https://github.com/imputnet/cobalt)"
 
 export {
     env,

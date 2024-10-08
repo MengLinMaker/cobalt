@@ -10,9 +10,6 @@ importers:
 
   api:
     dependencies:
-      '@imput/version-info':
-        specifier: workspace:^
-        version: link:../packages/version-info
       content-disposition-header:
         specifier: 0.6.0
         version: 0.6.0
