@@ -24,7 +24,6 @@
   },
   "homepage": "https://github.com/imputnet/cobalt#readme",
   "dependencies": {
-    "content-disposition-header": "0.6.0",
     "dotenv": "^16.0.1",
     "express": "^4.21.0",
     "hls-parser": "^0.10.7",

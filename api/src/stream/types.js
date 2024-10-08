@@ -1,7 +1,13 @@
-import { create as contentDisposition } from 'content-disposition-header'
 import { request } from 'undici'
 import { destroyInternalStream } from './manage.js'
 import { closeRequest, getHeaders, pipe } from './shared.js'
+
+function contentDisposition(filename, options) {
+  const opts = options || {}
+  const type = opts.type || "attachment"
+  const params = createparams(filename, opts.fallback)
+  return format({ type, parameters: params })
+}
 
 const proxy = async (streamInfo, res) => {
   const abortController = new AbortController()
