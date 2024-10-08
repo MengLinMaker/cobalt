@@ -10,9 +10,7 @@ import { env } from '../config.js'
 import { generateHmac, generateSalt } from '../misc/crypto.js'
 import { randomizeCiphers } from '../misc/randomize-ciphers.js'
 import { createResponse, getIP, normalizeRequest } from '../processing/request.js'
-import { friendlyServiceName } from '../processing/service-alias.js'
 import { extract } from '../processing/url.js'
-import { verifyTurnstileToken } from '../security/turnstile.js'
 import { getInternalStream, verifyStream } from '../stream/manage.js'
 
 const acceptRegex = /^application\/json(; charset=utf-8)?$/
@@ -31,21 +29,6 @@ const fail = (res, code, context) => {
 }
 
 export const runAPI = (express, app, __dirname) => {
-  const startTime = new Date()
-  const startTimestamp = startTime.getTime()
-
-  const serverInfo = JSON.stringify({
-    cobalt: {
-      url: env.apiURL,
-      startTime: `${startTimestamp}`,
-      durationLimit: env.durationLimit,
-      turnstileSitekey: env.sessionEnabled ? env.turnstileSitekey : undefined,
-      services: [...env.enabledServices].map((e) => {
-        return friendlyServiceName(e)
-      }),
-    },
-  })
-
   const handleRateExceeded = (_, res) => {
     const { status, body } = createResponse('error', {
       code: 'error.api.rate_exceeded',
@@ -55,15 +38,6 @@ export const runAPI = (express, app, __dirname) => {
     })
     return res.status(status).json(body)
   }
-
-  const sessionLimiter = rateLimit({
-    windowMs: 60000,
-    max: 10,
-    standardHeaders: true,
-    legacyHeaders: false,
-    keyGenerator: (req) => generateHmac(getIP(req), ipSalt),
-    handler: handleRateExceeded,
-  })
 
   const apiLimiter = rateLimit({
     windowMs: env.rateLimitWindow * 1000,
@@ -149,41 +123,6 @@ export const runAPI = (express, app, __dirname) => {
 
   app.post('/', apiLimiter)
   app.use('/', express.json({ limit: 1024 }))
-
-  app.use('/', (err, _, res, next) => {
-    if (err) {
-      const { status, body } = createResponse('error', {
-        code: 'error.api.invalid_body',
-      })
-      return res.status(status).json(body)
-    }
-
-    next()
-  })
-
-  app.post('/session', sessionLimiter, async (req, res) => {
-    if (!env.sessionEnabled) {
-      return fail(res, 'error.api.auth.not_configured')
-    }
-
-    const turnstileResponse = req.header('cf-turnstile-response')
-
-    if (!turnstileResponse) {
-      return fail(res, 'error.api.auth.turnstile.missing')
-    }
-
-    const turnstileResult = await verifyTurnstileToken(turnstileResponse, req.ip)
-
-    if (!turnstileResult) {
-      return fail(res, 'error.api.auth.turnstile.invalid')
-    }
-
-    try {
-      res.json(jwt.generate())
-    } catch {
-      return fail(res, 'error.api.generic')
-    }
-  })
 
   app.post('/', async (req, res) => {
     const request = req.body
@@ -271,19 +210,6 @@ export const runAPI = (express, app, __dirname) => {
     streamInfo.headers = new Map([...(streamInfo.headers || []), ...Object.entries(req.headers)])
 
     return stream(res, { type: 'internal', ...streamInfo })
-  })
-
-  app.get('/', (_, res) => {
-    res.type('json')
-    res.status(200).send(serverInfo)
-  })
-
-  app.get('/favicon.ico', (req, res) => {
-    res.status(404).end()
-  })
-
-  app.get('/*', (req, res) => {
-    res.redirect('/')
   })
 
   // handle all express errors

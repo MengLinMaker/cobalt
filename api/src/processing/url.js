@@ -2,7 +2,6 @@ import { strict as assert } from 'node:assert'
 import psl from 'psl'
 
 import { env } from '../config.js'
-import { friendlyServiceName } from './service-alias.js'
 import { services } from './service-config.js'
 
 function aliasURL(url) {
@@ -184,7 +183,7 @@ export function extract(url) {
     return {
       error: 'link.unsupported',
       context: {
-        service: friendlyServiceName(host),
+        service: host,
       },
     }
   }
